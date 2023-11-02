@@ -7,7 +7,159 @@
     <title>TUI Test</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="pickersContainer">
+        <tui-destination-picker></tui-destination-picker>
+        <tui-date-picker></tui-date-picker>
+      </div>
+      <tui-selection-summary></tui-selection-summary>
+    </div>
+
+    <template id="tui-destination-picker">
+      <style>
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
+        input {
+          box-sizing: border-box;
+          position: relative;
+          border-radius: 3px;
+          border: 1px solid #737373;
+          display: block;
+          cursor: pointer;
+          height: 50px;
+          padding: 8px 16px 8px 8px;
+          transition: all 0.3s;
+          text-overflow: ellipsis;
+          min-width: 350px;
+          padding-inline: 0;
+          padding-block: 0;
+          text-indent: 16px;
+          font-size: 20px;
+        }
+
+        input::placeholder {
+          position: absolute;
+          color: white;
+          font-size: 20px;
+          top: 15px;
+        }
+
+        .container {
+          position: relative;
+        }
+
+        .dialog {
+          position: absolute;
+          padding: 16px;
+          display: none;
+          background-color: #3b3b3b;
+          width: 350px;
+          min-height: 50px;
+        }
+
+        .show {
+          display: block;
+        }
+
+        .item {
+          display: flex;
+          padding: 8px 8px;
+          cursor: pointer;
+        }
+
+        b {
+          color: lightskyblue;
+        }
+      </style>
+
+      <div class="container">
+        <input type="text" id="destination-picker" placeholder="Where to?" />
+        <div id="dialog" class="dialog"></div>
+      </div>
+    </template>
+
+    <template id="tui-date-picker">
+      <style>
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
+        input {
+          box-sizing: border-box;
+          display: block;
+          cursor: pointer;
+          position: relative;
+          border-radius: 3px;
+          border: 1px solid #737373;
+          height: 50px;
+          padding: 8px 16px 8px 8px;
+          transition: all 0.3s;
+          text-overflow: ellipsis;
+          min-width: 220px;
+        }
+
+        input:before {
+          position: absolute;
+          top: 15px;
+          left: 16px;
+          content: "YYYY-MM-DD";
+          display: inline-block;
+          color: white;
+          font-size: 20px;
+        }
+
+        input[data-date]::before {
+          content: attr(data-date);
+        }
+
+        input::-webkit-datetime-edit,
+        input::-webkit-inner-spin-button,
+        input::-webkit-clear-button {
+          display: none;
+        }
+
+        input::-webkit-calendar-picker-indicator {
+          position: absolute;
+          top: 14px;
+          right: 16px;
+          color: black;
+          width: 24px;
+          height: 24px;
+          opacity: 1;
+        }
+      </style>
+      <input id="date-picker" type="date" />
+    </template>
+
+    <template id="tui-selection-summary">
+      <style>
+        .container {
+          width: 100%;
+          padding: 8px 16px 8px 8px;
+          text-overflow: ellipsis;
+          display: flex;
+          margin-top: 40px;
+          flex-direction: column;
+          gap: 25px;
+          align-items: flex-start;
+        }
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+      </style>
+      <div class="container">
+        <div id="destination">Please select Destination</div>
+        <div id="date">Please select date</div>
+      </div>
+    </template>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
